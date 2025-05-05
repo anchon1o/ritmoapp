@@ -1,0 +1,35 @@
+
+body {
+  font-family: sans-serif;
+  background: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+h1 {
+  color: #2a4d9b;
+}
+button {
+  font-size: 1em;
+  margin: 5px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+}
+.nav button {
+  background-color: #2a4d9b;
+  color: white;
+}
+.mode {
+  margin-top: 20px;
+}
+.input-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 10px 0;
+}
+.input-display {
+  margin-top: 10px;
+  font-size: 1.5em;
+}

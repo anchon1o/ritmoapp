@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Entrenamiento Rítmico</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Entrenamiento Rítmico</h1>
+  <div class="nav">
+    <button onclick="showMode('repite')">1. Escucha y Repite</button>
+    <button onclick="showMode('lee')">2. Lee y Toca</button>
+    <button onclick="showMode('dictado')">3. Dictado Rítmico</button>
+  </div>
+
+  <div id="repite" class="mode">
+    <h2>Escucha y Repite</h2>
+    <button onclick="playRhythm()">▶ Escuchar ritmo</button><br>
+    <button onclick="registerTap()">● Pulsa aquí</button>
+    <div id="feedbackRepite"></div>
+  </div>
+
+  <div id="lee" class="mode" style="display:none;">
+    <h2>Lee y Toca</h2>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Rhythm_example_1.svg/320px-Rhythm_example_1.svg.png" width="300" alt="Ritmo visual"><br>
+    <button onclick="startMetronome()">▶ Metrónomo</button><br>
+    <button onclick="registerTap()">● Pulsa aquí</button>
+    <div id="feedbackLee"></div>
+  </div>
+
+  <div id="dictado" class="mode" style="display:none;">
+    <h2>Dictado Rítmico</h2>
+    <button onclick="playRhythm()">▶ Escuchar ritmo</button><br>
+    <div class="input-row">
+      <button onclick="addValue('♩')">♩ Negra</button>
+      <button onclick="addValue('♪♪')">♪♪ Corcheas</button>
+      <button onclick="addValue('𝄽')">𝄽 Silencio</button>
+      <button onclick="addValue('𝅘𝅥')">𝅘𝅥 Corchea</button>
+      <button onclick="deleteLast()">← Borrar</button>
+      <button onclick="clearAll()">✖ Limpiar</button>
+    </div>
+    <div id="inputDisplay" class="input-display"></div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
