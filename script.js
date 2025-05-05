@@ -1,7 +1,56 @@
 
+let figures = [];
+
+function addFigure(filename) {
+  figures.push(filename);
+  renderFigures();
+}
+
+function removeLast() {
+  figures.pop();
+  renderFigures();
+}
+
+function clearFigures() {
+  figures = [];
+  renderFigures();
+}
+
+function renderFigures() {
+  const container = document.getElementById("figureDisplay");
+  container.innerHTML = '';
+  figures.forEach(f => {
+    const img = document.createElement("img");
+    img.src = "svg/" + f;
+    container.appendChild(img);
+  });
+}
+
+function playRhythm() {
+  // Aquí iría el audio real del dictado (de momento es solo informativo)
+  alert("🎵 (Reproducir ritmo original aquí)");
+}
+
+function checkAnswer() {
+  const expected = ["negra.svg", "dos_corcheas.svg", "silencio_negra.svg"];
+  const feedback = document.getElementById("feedback");
+  if (figures.length !== expected.length) {
+    feedback.textContent = "❌ Longitud incorrecta.";
+    return;
+  }
+  let correct = true;
+  for (let i = 0; i < expected.length; i++) {
+    if (figures[i] !== expected[i]) {
+      correct = false;
+      break;
+    }
+  }
+  feedback.textContent = correct ? "✅ ¡Correcto!" : "❌ Intenta de nuevo.";
+}
+
+const rhythmPattern = [0, 600, 1200, 1800];
 let tapTimes = [];
 let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const rhythmPattern = [0, 600, 1200, 1800];
 
 function playClick(timeOffset = 0) {
   const osc = audioCtx.createOscillator();
@@ -13,15 +62,6 @@ function playClick(timeOffset = 0) {
   gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + timeOffset + 0.1);
   osc.start(audioCtx.currentTime + timeOffset);
   osc.stop(audioCtx.currentTime + timeOffset + 0.1);
-}
-
-function playRhythm() {
-  const startTime = audioCtx.currentTime;
-  rhythmPattern.forEach((offset) => {
-    playClick(offset / 1000);
-  });
-  tapTimes = [];
-  document.getElementById("feedbackRepite").textContent = "Ahora repite el ritmo pulsando.";
 }
 
 function registerTap() {
@@ -40,8 +80,8 @@ function registerTap() {
       if (Math.abs(expected - actual) > 150) correct = false;
     }
     document.getElementById("feedbackRepite").textContent = correct
-      ? "¡Correcto! Ritmo bien reproducido."
-      : "Intenta de nuevo. Revisa el pulso.";
+      ? "✅ ¡Correcto!"
+      : "❌ Intenta de nuevo.";
   }
 }
 
@@ -55,23 +95,6 @@ function startMetronome() {
     playClick();
     i++;
   }, 600);
-}
-
-let inputValues = [];
-function addValue(val) {
-  inputValues.push(val);
-  updateDisplay();
-}
-function deleteLast() {
-  inputValues.pop();
-  updateDisplay();
-}
-function clearAll() {
-  inputValues = [];
-  updateDisplay();
-}
-function updateDisplay() {
-  document.getElementById("inputDisplay").textContent = inputValues.join(" ");
 }
 
 function showMode(modeId) {
